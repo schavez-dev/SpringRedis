@@ -8,14 +8,15 @@ import com.spring.fonyou.main.pruebas.fonyou.curso.model.Estudiante;
 
 @Configuration
 public class RedisConfiguration {
-  @Bean
+  
+	@Bean
   JedisConnectionFactory conecJedisFactory() {
 	  return new JedisConnectionFactory();
   }
   
   @Bean
-  RedisTemplate<Object, Estudiante> redisTemplate(){
-	  final RedisTemplate<Object, Estudiante> redisTemp = new RedisTemplate<>();
+  RedisTemplate<String, Estudiante> redisTemplate(){
+	  final RedisTemplate<String, Estudiante> redisTemp = new RedisTemplate<>();
 	  redisTemp.setConnectionFactory(conecJedisFactory());
 	  return redisTemp;
   }
