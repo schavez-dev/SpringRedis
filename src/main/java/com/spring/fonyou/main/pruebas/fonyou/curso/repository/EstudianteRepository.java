@@ -45,7 +45,7 @@ public class EstudianteRepository implements RedisRepository {
 	@Override
 	public void guardar(Estudiante estud) {
 //		Con esto ==> UUID.randomUUID().toString() se crea un ID aleatorio
-		System.out.println("ANTES DE GUARDAR");
+//		System.out.println("ANTES DE GUARDAR");
 		hashOperacionesBD.put(KEY, ""+UUID.randomUUID(), estud);
 	}
 
