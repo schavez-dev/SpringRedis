@@ -16,11 +16,11 @@ public class EstudianteRepository implements RedisRepository {
 
 	private static final String KEY = "Estudiantes";
 	
-	private RedisTemplate<String, Estudiante> redisTempl;
+	private RedisTemplate<Object, Estudiante> redisTempl;
 //	Ejecutas las operaciones por medio del redisTempl
 	private HashOperations hashOperacionesBD;
 
-	public EstudianteRepository(RedisTemplate<String, Estudiante> redisTempl) {
+	public EstudianteRepository(RedisTemplate<Object, Estudiante> redisTempl) {
 		this.redisTempl = redisTempl;
 	}
 
@@ -46,7 +46,10 @@ public class EstudianteRepository implements RedisRepository {
 	public void guardar(Estudiante estud) {
 //		Con esto ==> UUID.randomUUID().toString() se crea un ID aleatorio
 //		System.out.println("ANTES DE GUARDAR");
-		hashOperacionesBD.put(KEY, ""+UUID.randomUUID(), estud);
+//		hashOperacionesBD.put(KEY, ""+UUID.randomUUID(), estud);
+		redisTempl
+        .opsForList()
+        .leftPush(KEY, estud);
 	}
 
 	@Override

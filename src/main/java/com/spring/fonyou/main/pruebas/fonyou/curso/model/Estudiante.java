@@ -2,6 +2,18 @@ package com.spring.fonyou.main.pruebas.fonyou.curso.model;
 
 import java.io.Serializable;
 
+import lombok.Data;
+/**
+ * 
+ * @author schavez
+ * 31 dic 2020 12:06:57
+ * Estudiante.java
+ *
+ *	Se realiza la modificaion para lombok 
+ *	
+ */
+
+@Data
 public class Estudiante implements Serializable {
 
 	private String nombre;
@@ -11,52 +23,53 @@ public class Estudiante implements Serializable {
 	private String edad;
 	private String correo;
 
-	public String getNombre() {
-		return nombre;
-	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApPaterno() {
-		return apPaterno;
-	}
-
-	public void setApPaterno(String apPaterno) {
-		this.apPaterno = apPaterno;
-	}
-
-	public String getApMaterno() {
-		return apMaterno;
-	}
-
-	public void setApMaterno(String apMaterno) {
-		this.apMaterno = apMaterno;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public String getEdad() {
-		return edad;
-	}
-
-	public void setEdad(String edad) {
-		this.edad = edad;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+//	public String getNombre() {
+//		return nombre;
+//	}
+//
+//	public void setNombre(String nombre) {
+//		this.nombre = nombre;
+//	}
+//
+//	public String getApPaterno() {
+//		return apPaterno;
+//	}
+//
+//	public void setApPaterno(String apPaterno) {
+//		this.apPaterno = apPaterno;
+//	}
+//
+//	public String getApMaterno() {
+//		return apMaterno;
+//	}
+//
+//	public void setApMaterno(String apMaterno) {
+//		this.apMaterno = apMaterno;
+//	}
+//
+//	public String getSexo() {
+//		return sexo;
+//	}
+//
+//	public void setSexo(String sexo) {
+//		this.sexo = sexo;
+//	}
+//
+//	public String getEdad() {
+//		return edad;
+//	}
+//
+//	public void setEdad(String edad) {
+//		this.edad = edad;
+//	}
+//
+//	public String getCorreo() {
+//		return correo;
+//	}
+//
+//	public void setCorreo(String correo) {
+//		this.correo = correo;
+//	}
 
 }
