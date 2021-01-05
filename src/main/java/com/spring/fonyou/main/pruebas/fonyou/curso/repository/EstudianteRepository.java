@@ -1,5 +1,6 @@
 package com.spring.fonyou.main.pruebas.fonyou.curso.repository;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -52,12 +53,22 @@ public class EstudianteRepository implements RedisRepository {
 //		redisTempl
 //        .opsForList()
 //        .leftPush(KEY, estud);
+		 Map<String,Object> map = new HashMap<>();
+		 map.put("nombre",estud.getNombre());
+	     map.put("apPaterno",estud.getApPaterno());
+	     map.put("apMaterno",estud.getApMaterno());
+	     map.put("sexo",estud.getSexo());
+	     map.put("edad",estud.getEdad());
+	     map.put("correo",estud.getCorreo());
+		
+		
 		try {
 			redisTempl
 	        .opsForHash()
-	        .put(KEY, UUID.randomUUID().toString(), estud);
+	        .putAll(KEY, map);
 			log.debug("Ejecutado!");
 		} catch (Exception e) {
+			log.error("Error al guardar el estudiante");
 			log.error(KEY, e);
 		}
 		

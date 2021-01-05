@@ -1,5 +1,6 @@
 package com.spring.fonyou.main.pruebas.fonyou.curso.config;
 
+import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
@@ -97,7 +98,8 @@ public class RedisConfiguration {
 		template.setConnectionFactory(connectionFactory);
 		template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
 		template.setKeySerializer(new StringRedisSerializer());
-		template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+//		template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+		template.setValueSerializer(new StringRedisSerializer());
 		template.setHashValueSerializer(new StringRedisSerializer());
 		return template;
 	}
