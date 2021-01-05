@@ -10,6 +10,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 import com.spring.fonyou.main.pruebas.fonyou.curso.model.Estudiante;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class EstudianteRepository implements RedisRepository {
 
@@ -49,8 +52,15 @@ public class EstudianteRepository implements RedisRepository {
 //		redisTempl
 //        .opsForList()
 //        .leftPush(KEY, estud);
-		redisTempl
-        .opsForHash().put(KEY, UUID.randomUUID().toString(), estud);
+		try {
+			redisTempl
+	        .opsForHash()
+	        .put(KEY, UUID.randomUUID().toString(), estud);
+			log.debug("Ejecutado!");
+		} catch (Exception e) {
+			log.error(KEY, e);
+		}
+		
 	}
 
 	@Override

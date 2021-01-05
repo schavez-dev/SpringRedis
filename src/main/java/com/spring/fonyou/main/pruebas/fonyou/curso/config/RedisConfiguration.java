@@ -1,7 +1,7 @@
 package com.spring.fonyou.main.pruebas.fonyou.curso.config;
 
-import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +15,12 @@ import org.springframework.data.redis.connection.lettuce.LettucePoolingClientCon
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
 import com.spring.fonyou.main.pruebas.fonyou.curso.model.Estudiante;
 
 @Configuration
 public class RedisConfiguration {
+
 	/**
 	 * Return new instance of redis standalone Configuration.
 	 *
@@ -96,6 +98,7 @@ public class RedisConfiguration {
 		template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
 		template.setKeySerializer(new StringRedisSerializer());
 		template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+		template.setHashValueSerializer(new StringRedisSerializer());
 		return template;
 	}
 
@@ -110,4 +113,5 @@ public class RedisConfiguration {
 //	  redisTemp.setConnectionFactory(conecJedisFactory());
 //	  return redisTemp;
 //  }
+
 }
