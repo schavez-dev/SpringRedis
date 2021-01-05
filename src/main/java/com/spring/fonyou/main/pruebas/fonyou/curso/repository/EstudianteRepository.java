@@ -18,11 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 public class EstudianteRepository implements RedisRepository {
 
 	private static final String KEY = "Estudiantes";
-	
+
 	private RedisTemplate<Object, Estudiante> redisTempl;
 //	Ejecutas las operaciones por medio del redisTempl
 	private HashOperations<Object, Object, Estudiante> hashOperacionesBD;
-
 
 	public EstudianteRepository(RedisTemplate<Object, Estudiante> redisTempl) {
 		this.redisTempl = redisTempl;
@@ -34,7 +33,6 @@ public class EstudianteRepository implements RedisRepository {
 		hashOperacionesBD = redisTempl.opsForHash();
 	}
 
-	
 	@Override
 	public Map<Object, Estudiante> todos() {
 		return hashOperacionesBD.entries(KEY);
@@ -43,35 +41,33 @@ public class EstudianteRepository implements RedisRepository {
 	@Override
 	public Estudiante porId(String id) {
 		// Se caste a Tipo: Estudiante (Clase)
-		return (Estudiante) hashOperacionesBD.get(KEY,id);
+		return (Estudiante) hashOperacionesBD.get(KEY, id);
 	}
 
 	@Override
 	public void guardar(Estudiante estud) {
-//		Con esto ==> UUID.randomUUID().toString() se crea un ID aleatorio
-		System.out.println("ANTES DE GUARDAR");
+
+		System.out.println("FUNCION DE GUARDAR");
 //		redisTempl
 //        .opsForList()
 //        .leftPush(KEY, estud);
-		 Map<String,Object> map = new HashMap<>();
-		 map.put("nombre",estud.getNombre());
-	     map.put("apPaterno",estud.getApPaterno());
-	     map.put("apMaterno",estud.getApMaterno());
-	     map.put("sexo",estud.getSexo());
-	     map.put("edad",estud.getEdad());
-	     map.put("correo",estud.getCorreo());
-		
-		
+		Map<String, Object> map = new HashMap<>();
+		map.put("nombre", estud.getNombre());
+		map.put("apPaterno", estud.getApPaterno());
+		map.put("apMaterno", estud.getApMaterno());
+		map.put("sexo", estud.getSexo());
+		map.put("edad", estud.getEdad());
+		map.put("correo", estud.getCorreo());
+
 		try {
-			redisTempl
-	        .opsForHash()
-	        .putAll(KEY, map);
-			log.debug("Ejecutado!");
+			redisTempl.opsForHash().putAll(KEY, map);
+			log.info("Ejecutado!");
+			System.out.println(map.size());
 		} catch (Exception e) {
 			log.error("Error al guardar el estudiante");
 			log.error(KEY, e);
 		}
-		
+
 	}
 
 	@Override
