@@ -21,7 +21,7 @@ public class EstudianteRepository implements RedisRepository {
 
 	private RedisTemplate<Object, Estudiante> redisTempl;
 //	Ejecutas las operaciones por medio del redisTempl
-	private HashOperations<Object, Object, Estudiante> hashOperacionesBD;
+	private HashOperations<Object,Object, Estudiante> hashOperacionesBD;
 
 	public EstudianteRepository(RedisTemplate<Object, Estudiante> redisTempl) {
 		this.redisTempl = redisTempl;
@@ -35,12 +35,14 @@ public class EstudianteRepository implements RedisRepository {
 
 	@Override
 	public Map<Object, Estudiante> todos() {
+		log.info("Listando Todos los Alumnos");
 		return hashOperacionesBD.entries(KEY);
 	}
 
 	@Override
 	public Estudiante porId(String id) {
 		// Se caste a Tipo: Estudiante (Clase)
+		log.info("Buscando por Id: "+id);
 		return (Estudiante) hashOperacionesBD.get(KEY, id);
 	}
 
@@ -58,11 +60,11 @@ public class EstudianteRepository implements RedisRepository {
 		map.put("sexo", estud.getSexo());
 		map.put("edad", estud.getEdad());
 		map.put("correo", estud.getCorreo());
-
 		try {
 			redisTempl.opsForHash().putAll(KEY, map);
+//			redisTempl.opsForHash().put(KEY, "7786876", map);
 			log.info("Ejecutado!");
-			System.out.println(map.size());
+//			System.out.println(map.size());
 		} catch (Exception e) {
 			log.error("Error al guardar el estudiante");
 			log.error(KEY, e);
@@ -72,6 +74,12 @@ public class EstudianteRepository implements RedisRepository {
 
 	@Override
 	public void borrar(String id) {
-		hashOperacionesBD.delete(KEY, id);
+		try {
+			hashOperacionesBD.delete(KEY, id);
+		} catch (Exception e) {
+			log.error("Error al borrar al estudiante!");
+			log.error(KEY, e);
+		}
+		
 	}
 }
